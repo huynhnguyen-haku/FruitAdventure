@@ -6,7 +6,7 @@ public class LevelMenu : MonoBehaviour
 {
     public Button[] buttons;
     public GameObject levelBottons;
-    public int totalLevels; // Add this field to specify the total number of levels
+    public int totalLevels; 
 
     private void Awake()
     {

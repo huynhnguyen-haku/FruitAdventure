@@ -14,11 +14,17 @@ public class SkinSelection : MonoBehaviour
 
     private void Start()
     {
+        // Load the selected skin from PlayerPrefs
+        string selectedSkin = PlayerPrefs.GetString("SelectedSkin", "Frog");
+        playerSelection = (Player)System.Enum.Parse(typeof(Player), selectedSkin);
         UpdateSkin();
     }
 
     public void UpdateSkin()
     {
+        // Save the selected skin to PlayerPrefs
+        PlayerPrefs.SetString("SelectedSkin", playerSelection.ToString());
+
         switch (playerSelection)
         {
             case Player.Frog:

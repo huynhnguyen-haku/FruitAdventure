@@ -39,5 +39,6 @@ public class UIManager : MonoBehaviour
     public void LevelSelection()
     {
         SceneManager.LoadScene("Main Menu");
+        Time.timeScale = 1;
     }
 }
