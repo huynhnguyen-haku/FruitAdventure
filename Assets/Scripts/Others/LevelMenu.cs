@@ -6,6 +6,7 @@ public class LevelMenu : MonoBehaviour
 {
     public Button[] buttons;
     public GameObject levelBottons;
+    public int totalLevels; // Add this field to specify the total number of levels
 
     private void Awake()
     {
@@ -29,11 +30,16 @@ public class LevelMenu : MonoBehaviour
         PlayerPrefs.SetInt("FruitsCollected", 0);
         PlayerPrefs.SetInt("RespawnCount", 0);
 
-        // Load the selected level
-        string levelName = "Level " + levelId;
-        SceneManager.LoadSceneAsync(levelName);
+        if (levelId > totalLevels)
+        {
+            SceneManager.LoadSceneAsync("Credit Scene");
+        }
+        else
+        {
+            string levelName = "Level " + levelId;
+            SceneManager.LoadSceneAsync(levelName);
+        }
     }
-
 
     void ButtonsToArray()
     {
