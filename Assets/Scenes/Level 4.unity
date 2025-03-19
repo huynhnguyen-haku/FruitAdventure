@@ -2890,7 +2890,7 @@ MonoBehaviour:
   jump: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
   playerHit: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
   monsterHit: {fileID: 8300000, guid: cf6c0e7fbef9449c98a0cdb5ea0c4d9f, type: 3}
-  BGM: {fileID: 8300000, guid: 1532c7e67c2d60c4c8780da14b7e8fcf, type: 3}
+  BGM: {fileID: 8300000, guid: 47f45ef7b5767674393cc401fc325705, type: 3}
   checkPoint: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   finishStage: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
   deadScreen: {fileID: 8300000, guid: 4b4dd7245f6104c8c8eb07ccf6b386ed, type: 3}
@@ -3435,7 +3435,6 @@ Transform:
   - {fileID: 2085132097}
   - {fileID: 840252472}
   - {fileID: 33425181}
-  - {fileID: 1796335994}
   - {fileID: 1668304970}
   - {fileID: 796831176}
   - {fileID: 66033391}
@@ -18796,72 +18795,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5499423656298342442, guid: a3c361c19f746914c9e0aa55127c9579, type: 3}
   m_PrefabInstance: {fileID: 1101855531}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1796335993
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 714613718}
-    m_Modifications:
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.28020117
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8513390668581168892, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_Name
-      value: Trampoline (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8513390668581168892, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
---- !u!4 &1796335994 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2767543169295389979, guid: 77e9365a371b8ee44848bf304435f248, type: 3}
-  m_PrefabInstance: {fileID: 1796335993}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1799319092 stripped
 Transform:

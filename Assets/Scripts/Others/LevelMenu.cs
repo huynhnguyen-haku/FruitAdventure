@@ -30,15 +30,8 @@ public class LevelMenu : MonoBehaviour
         PlayerPrefs.SetInt("FruitsCollected", 0);
         PlayerPrefs.SetInt("RespawnCount", 0);
 
-        if (levelId > totalLevels)
-        {
-            SceneManager.LoadSceneAsync("Credit Scene");
-        }
-        else
-        {
-            string levelName = "Level " + levelId;
-            SceneManager.LoadSceneAsync(levelName);
-        }
+        string levelName = "Level " + levelId;
+        SceneManager.LoadSceneAsync(levelName);
     }
 
     void ButtonsToArray()
