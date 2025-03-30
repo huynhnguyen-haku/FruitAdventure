@@ -10,7 +10,8 @@ public class CreditScene : MonoBehaviour
 
     private bool isScrolling = true;
 
-    void Update()
+
+    private void Update()
     {
         if (isScrolling)
         {
@@ -22,8 +23,7 @@ public class CreditScene : MonoBehaviour
             LoadMainMenu();
         }
     }
-
-    void LoadMainMenu()
+    private void LoadMainMenu()
     {
         SceneManager.LoadScene(mainMenuScene);
     }

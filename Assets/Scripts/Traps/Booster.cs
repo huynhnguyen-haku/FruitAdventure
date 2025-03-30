@@ -9,7 +9,6 @@ public class Booster : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

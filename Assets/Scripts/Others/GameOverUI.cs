@@ -12,7 +12,6 @@ public class GameOverUI : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectsWithTag("Audio")[0].GetComponent<AudioManager>();
     }
-
     private void Start()
     {
         audioManager.PlaySFX(audioManager.resultScreen);
@@ -23,31 +22,43 @@ public class GameOverUI : MonoBehaviour
 
     public void Restart()
     {
+        ClearStageData();
+        ResumeGameTime();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void LevelSelection()
+    {
+        ClearStageData();
+        ResumeGameTime();
+        SceneManager.LoadScene("LevelSelection");
+    }
+    public void MainMenu()
+    {
+        ClearStageData();
+        ResumeGameTime();
+        SceneManager.LoadScene("Main Menu");
+    }
+
+
+    private static void ResumeGameTime()
+    {
+        Time.timeScale = 1;
+    }
+    private static void ClearStageData()
+    {
         PlayerPrefs.DeleteKey("CheckPointPositionX");
         PlayerPrefs.DeleteKey("CheckPointPositionY");
         PlayerPrefs.SetInt("FruitsCollected", 0);
         PlayerPrefs.SetInt("RespawnCount", 0);
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void LevelSelection()
-    {
-        SceneManager.LoadScene("LevelSelection");
-    }
 
-    public void MainMenu()
-    {
-        SceneManager.LoadScene("Main Menu");
-    }
-
-    public void DisplayTotalScore()
+    private void DisplayTotalScore()
     {
         int totalFruitsCollected = PlayerPrefs.GetInt("FruitsCollected");
         totalScore.text = totalFruitsCollected.ToString();
     }
-
-    public void DisplayTotalDeath()
+    private void DisplayTotalDeath()
     {
         int totalDeaths = PlayerPrefs.GetInt("RespawnCount");
         totalDeath.text = totalDeaths.ToString();

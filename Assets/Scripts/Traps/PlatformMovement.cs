@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlatformMovement : MonoBehaviour
@@ -13,47 +14,58 @@ public class PlatformMovement : MonoBehaviour
     private void Start()
     {
         waitTime = startWaitTime;
+        StartCoroutine(MovePlatform());
     }
 
-    private void Update()
+
+    private IEnumerator MovePlatform()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[i].position, speed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, moveSpots[i].position) < 0.1f)
+        while (true)
         {
-            if (waitTime <= 0)
+            transform.position = Vector2.MoveTowards(transform.position, moveSpots[i].position, speed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, moveSpots[i].position) < 0.1f)
             {
-                if (!reverse)
+                if (waitTime <= 0)
                 {
-                    if (i < moveSpots.Length - 1)
-                    {
-                        i++;
-                    }
-                    else
-                    {
-                        reverse = true;
-                        i--;
-                    }
+                    UpdateTargetIndex();
+                    waitTime = startWaitTime;
                 }
                 else
                 {
-                    if (i > 0)
-                    {
-                        i--;
-                    }
-                    else
-                    {
-                        reverse = false;
-                        i++;
-                    }
+                    waitTime -= Time.deltaTime;
                 }
-                waitTime = startWaitTime;
+            }
+            yield return null;
+        }
+    }
+    private void UpdateTargetIndex()
+    {
+        if (!reverse)
+        {
+            if (i < moveSpots.Length - 1)
+            {
+                i++;
             }
             else
             {
-                waitTime -= Time.deltaTime;
+                reverse = true;
+                i--;
+            }
+        }
+        else
+        {
+            if (i > 0)
+            {
+                i--;
+            }
+            else
+            {
+                reverse = false;
+                i++;
             }
         }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -62,7 +74,6 @@ public class PlatformMovement : MonoBehaviour
             collision.transform.SetParent(transform);
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

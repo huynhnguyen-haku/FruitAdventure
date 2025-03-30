@@ -18,7 +18,6 @@ public class EndlessBackground : MonoBehaviour
             UpdatebackgroundPosition(Vector3.left);
         }
     }
-
     void UpdatebackgroundPosition(Vector3 direction)
     {
         sideBackground.position = midBackground.position + direction * length;

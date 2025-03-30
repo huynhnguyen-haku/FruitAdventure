@@ -17,30 +17,17 @@ public class PlayerRespawn : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectsWithTag("Audio")[0].GetComponent<AudioManager>();
         respawnCount = PlayerPrefs.GetInt("RespawnCount", 0);
+        animator = GetComponent<Animator>();
     }
-
     private void Start()
     {
         life = hearts.Length;
-        animator = GetComponent<Animator>();
-
         initialSpawnPoint = transform.position;
 
-        if (PlayerPrefs.HasKey("CheckPointPositionX") && PlayerPrefs.HasKey("CheckPointPositionY"))
-        {
-            transform.position = new Vector2(
-                PlayerPrefs.GetFloat("CheckPointPositionX"),
-                PlayerPrefs.GetFloat("CheckPointPositionY")
-            );
-        }
-        else
-        {
-            transform.position = initialSpawnPoint;
-        }
+        HandleSpawnLocation();
 
         animator.Play("Appear");
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("CriticalDmgZone"))
@@ -52,6 +39,7 @@ public class PlayerRespawn : MonoBehaviour
             PlayerDamaged();
         }
     }
+
 
     private void CheckLife()
     {
@@ -73,33 +61,25 @@ public class PlayerRespawn : MonoBehaviour
             animator.Play("Hit");
         }
     }
-
     public void ReachedCheckPoint(float x, float y)
     {
         PlayerPrefs.SetFloat("CheckPointPositionX", x);
         PlayerPrefs.SetFloat("CheckPointPositionY", y);
     }
-
-    public void PlayerDamaged()
+    private void HandleSpawnLocation()
     {
-        audioManager.PlaySFX(audioManager.playerHit);
-        life--;
-        CheckLife();
-    }
-
-    public void PlayerCriticalDamaged()
-    {
-        life = 0;
-        foreach (var heart in hearts)
+        if (PlayerPrefs.HasKey("CheckPointPositionX") && PlayerPrefs.HasKey("CheckPointPositionY"))
         {
-            heart.SetActive(false);
+            transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CheckPointPositionX"),
+                PlayerPrefs.GetFloat("CheckPointPositionY")
+            );
         }
-        animator.Play("Hit");
-        audioManager.PlaySFX(audioManager.playerHit);
-        GetComponent<PlayerMovement>().enabled = false;
-        StartCoroutine(RespawnPlayerAfterDelay(0.25f));
+        else
+        {
+            transform.position = initialSpawnPoint;
+        }
     }
-
     private IEnumerator RespawnPlayerAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -128,6 +108,26 @@ public class PlayerRespawn : MonoBehaviour
         {
             heart.SetActive(true);
         }
+    }
+
+
+    public void PlayerDamaged()
+    {
+        audioManager.PlaySFX(audioManager.playerHit);
+        life--;
+        CheckLife();
+    }
+    public void PlayerCriticalDamaged()
+    {
+        life = 0;
+        foreach (var heart in hearts)
+        {
+            heart.SetActive(false);
+        }
+        animator.Play("Hit");
+        audioManager.PlaySFX(audioManager.playerHit);
+        GetComponent<PlayerMovement>().enabled = false;
+        StartCoroutine(RespawnPlayerAfterDelay(0.25f));
     }
 }
 

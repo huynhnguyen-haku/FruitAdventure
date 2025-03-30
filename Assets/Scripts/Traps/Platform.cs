@@ -1,41 +1,47 @@
+using System.Collections;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
     private PlatformEffector2D effector;
-
     public float startWaitTime;
-
     private float waitTime;
 
-    void Start()
+    private void Start()
     {
         effector = GetComponent<PlatformEffector2D>();
+        waitTime = startWaitTime;
+        StartCoroutine(CheckInput());
     }
 
-    void Update()
+    private IEnumerator CheckInput()
     {
-        if (Input.GetKeyUp("s") || Input.GetKeyUp(KeyCode.DownArrow))
+        while (true)
         {
-            waitTime = startWaitTime;
-        }
-
-        if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
-        {
-           if (waitTime <= 0)
+            if (Input.GetKeyUp("s") || Input.GetKeyUp(KeyCode.DownArrow))
             {
-                effector.rotationalOffset = 180f;
                 waitTime = startWaitTime;
             }
-            else 
-            {
-                waitTime -= Time.deltaTime;
-            }
-        }
 
-        if (Input.GetKey("space"))
-        {
-            effector.rotationalOffset = 0f;
+            if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
+            {
+                if (waitTime <= 0)
+                {
+                    effector.rotationalOffset = 180f;
+                    waitTime = startWaitTime;
+                }
+                else
+                {
+                    waitTime -= Time.deltaTime;
+                }
+            }
+
+            if (Input.GetKey("space"))
+            {
+                effector.rotationalOffset = 0f;
+            }
+
+            yield return null;
         }
     }
 }

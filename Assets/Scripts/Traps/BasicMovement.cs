@@ -15,43 +15,60 @@ public class BasicMovement : MonoBehaviour
     {
         waitTime = startWaitTime;
     }
-
     private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[i].position, speed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, moveSpots[i].position) < 0.1f)
+        MoveTowardsTarget();
+        if (IsTargetReached())
         {
-            if (waitTime <= 0)
+            HandleWaiting();
+        }
+    }
+
+
+    private void MoveTowardsTarget()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, moveSpots[i].position, speed * Time.deltaTime);
+    }
+    private bool IsTargetReached()
+    {
+        return Vector2.Distance(transform.position, moveSpots[i].position) < 0.1f;
+    }
+    private void HandleWaiting()
+    {
+        if (waitTime <= 0)
+        {
+            UpdateTargetIndex();
+            waitTime = startWaitTime;
+        }
+        else
+        {
+            waitTime -= Time.deltaTime;
+        }
+    }
+    private void UpdateTargetIndex()
+    {
+        if (!reverse)
+        {
+            if (i < moveSpots.Length - 1)
             {
-                if (!reverse)
-                {
-                    if (i < moveSpots.Length - 1)
-                    {
-                        i++;
-                    }
-                    else
-                    {
-                        reverse = true;
-                        i--;
-                    }
-                }
-                else
-                {
-                    if (i > 0)
-                    {
-                        i--;
-                    }
-                    else
-                    {
-                        reverse = false;
-                        i++;
-                    }
-                }
-                waitTime = startWaitTime;
+                i++;
             }
             else
             {
-                waitTime -= Time.deltaTime;
+                reverse = true;
+                i--;
+            }
+        }
+        else
+        {
+            if (i > 0)
+            {
+                i--;
+            }
+            else
+            {
+                reverse = false;
+                i++;
             }
         }
     }

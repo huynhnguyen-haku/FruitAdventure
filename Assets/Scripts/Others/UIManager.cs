@@ -11,34 +11,46 @@ public class UIManager : MonoBehaviour
         audioManager = GameObject.FindGameObjectsWithTag("Audio")[0].GetComponent<AudioManager>();
     }
 
+
     public void OptionPanel()
     {
         audioManager.PlaySFX(audioManager.buttonClick);
-        Time.timeScale = 0;
+        PauseGame();
         optionPanel.SetActive(true);
     }
-
-    public void Continue()
+    private static void PauseGame()
     {
-        audioManager.PlaySFX(audioManager.buttonClick);
-        Time.timeScale = 1;
-        optionPanel.SetActive(false);
+        Time.timeScale = 0;
     }
-
-    public void Restart()
+    private static void ResumeGameTime()
+    {
+        Time.timeScale = 1;
+    }
+    private static void ClearStageData()
     {
         PlayerPrefs.DeleteKey("CheckPointPositionX");
         PlayerPrefs.DeleteKey("CheckPointPositionY");
         PlayerPrefs.SetInt("FruitsCollected", 0);
         PlayerPrefs.SetInt("RespawnCount", 0);
-
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
+    public void Continue()
+    {
+        audioManager.PlaySFX(audioManager.buttonClick);
+        ResumeGameTime();
+        optionPanel.SetActive(false);
+    }
+    public void Restart()
+    {
+        ClearStageData();
+        ResumeGameTime();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void LevelSelection()
     {
+        ClearStageData();
+        ResumeGameTime();
         SceneManager.LoadScene("Main Menu");
-        Time.timeScale = 1;
     }
 }

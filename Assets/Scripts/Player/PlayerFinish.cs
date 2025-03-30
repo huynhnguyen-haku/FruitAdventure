@@ -10,12 +10,10 @@ public class PlayerFinish : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("FinishLine"))
         {
-            Debug.Log("Level Completed");
             animator.Play("Disappear");
             movementScript.enabled = false;
         }

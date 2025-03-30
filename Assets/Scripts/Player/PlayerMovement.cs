@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashCooldown;
     public float dashSpeed;
     public GameObject dashEffect;
-    public float dashEffectDuration = 0.5f; // New field for dash effect duration
+    public float dashEffectDuration = 0.5f; 
 
     Rigidbody2D rb2D;
 
@@ -27,12 +27,12 @@ public class PlayerMovement : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectsWithTag("Audio")[0].GetComponent<AudioManager>();
     }
-
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator.Play("Appear");
     }
+
 
     private void Update()
     {
@@ -41,6 +41,21 @@ public class PlayerMovement : MonoBehaviour
         HandleJump();
         HandleAnimation();
     }
+    private void FixedUpdate()
+    {
+        bool isDashing = Input.GetKey("left shift") && dashCooldown <= 0;
+
+        if (isDashing)
+        {
+            PerformDash();
+            dashEffect.SetActive(true);
+        }
+        else
+        {
+            HandleMovement();
+        }
+    }
+
 
     private void HandleJump()
     {
@@ -61,7 +76,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    private void HandleMovement()
+    {
+        float moveDirection = 0;
+        if (Input.GetKey("d") || Input.GetKey("right"))
+        {
+            moveDirection = runSpeed;
+            spriteRenderer.flipX = false;
+        }
+        else if (Input.GetKey("a") || Input.GetKey("left"))
+        {
+            moveDirection = -runSpeed;
+            spriteRenderer.flipX = true;
+        }
+        rb2D.linearVelocity = new Vector2(moveDirection, rb2D.linearVelocity.y);
+        animator.SetBool("Run", moveDirection != 0);
+    }
     private void HandleAnimation()
     {
         if (!CheckGround.isGrounded)
@@ -81,20 +111,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        bool isDashing = Input.GetKey("left shift") && dashCooldown <= 0;
-
-        if (isDashing)
-        {
-            PerformDash();
-            dashEffect.SetActive(true);
-        }
-        else
-        {
-            HandleMovement();
-        }
-    }
 
     private void PerformDash()
     {
@@ -105,29 +121,11 @@ public class PlayerMovement : MonoBehaviour
 
         StartCoroutine(StopDash());
     }
-
     IEnumerator StopDash()
     {
         yield return new WaitForSeconds(0.3f);
         rb2D.linearVelocity = new Vector2(0, rb2D.linearVelocity.y);
         dashEffect.SetActive(false);
-    }
-
-    private void HandleMovement()
-    {
-        float moveDirection = 0;
-        if (Input.GetKey("d") || Input.GetKey("right"))
-        {
-            moveDirection = runSpeed;
-            spriteRenderer.flipX = false;
-        }
-        else if (Input.GetKey("a") || Input.GetKey("left"))
-        {
-            moveDirection = -runSpeed;
-            spriteRenderer.flipX = true;
-        }
-        rb2D.linearVelocity = new Vector2(moveDirection, rb2D.linearVelocity.y);
-        animator.SetBool("Run", moveDirection != 0);
     }
 }
 

@@ -22,12 +22,16 @@ public class SceneController : MonoBehaviour
 
     public void NextLevel()
     {
+        ClearStageData();
+        StartCoroutine(LoadLevel());
+    }
+
+    private static void ClearStageData()
+    {
         PlayerPrefs.DeleteKey("CheckPointPositionX");
         PlayerPrefs.DeleteKey("CheckPointPositionY");
         PlayerPrefs.SetInt("FruitsCollected", 0);
         PlayerPrefs.SetInt("RespawnCount", 0);
-
-        StartCoroutine(LoadLevel());
     }
 
     IEnumerator LoadLevel()

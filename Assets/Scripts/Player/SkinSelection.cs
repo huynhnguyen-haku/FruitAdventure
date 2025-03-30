@@ -3,7 +3,6 @@ using UnityEngine;
 public class SkinSelection : MonoBehaviour
 {
     public enum Player { Frog, VirtualGuy, PinkMan, MaskDude };
-
     public Player playerSelection;
 
     public Animator animator;
