@@ -32,6 +32,8 @@ public class LevelMenu : MonoBehaviour
 
         string levelName = "Level " + levelId;
         SceneManager.LoadSceneAsync(levelName);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void ButtonsToArray()

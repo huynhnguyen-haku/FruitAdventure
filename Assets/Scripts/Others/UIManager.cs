@@ -11,21 +11,35 @@ public class UIManager : MonoBehaviour
         audioManager = GameObject.FindGameObjectsWithTag("Audio")[0].GetComponent<AudioManager>();
     }
 
+    private void Update()
+{
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        OptionPanel();
+    }
+}
+
 
     public void OptionPanel()
     {
         audioManager.PlaySFX(audioManager.buttonClick);
         PauseGame();
         optionPanel.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
+
     private static void PauseGame()
     {
         Time.timeScale = 0;
     }
+
     private static void ResumeGameTime()
     {
         Time.timeScale = 1;
     }
+
     private static void ClearStageData()
     {
         PlayerPrefs.DeleteKey("CheckPointPositionX");
@@ -40,13 +54,21 @@ public class UIManager : MonoBehaviour
         audioManager.PlaySFX(audioManager.buttonClick);
         ResumeGameTime();
         optionPanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
+
     public void Restart()
     {
         ClearStageData();
         ResumeGameTime();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
+
     public void LevelSelection()
     {
         ClearStageData();
