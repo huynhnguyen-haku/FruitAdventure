@@ -20,6 +20,8 @@ public class CreditScene : MonoBehaviour
 
         if (Input.anyKeyDown)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             LoadMainMenu();
         }
     }
